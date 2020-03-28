@@ -3,14 +3,22 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
     connection: {
-      filename: './src/database/db.sqlite'
+      host: 'localhost',
+      port: '5432',
+      database: 'db_bethehero',
+      user:     'postgres',
+      password: 'postgres',
+    },
+    pool: {
+      min: 2,
+      max: 10
     },
     migrations: {
-      directory: './src/database/migrations'
+      directory: './src/database/migrations',
+      tableName: 'knex_migrations'
     },
-    useNullAsDefault: true
   },
 
   test: {

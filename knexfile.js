@@ -1,4 +1,5 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
 
@@ -8,8 +9,8 @@ module.exports = {
       host: 'localhost',
       port: '5432',
       database: 'db_bethehero',
-      user:     'postgres',
-      password: 'postgres',
+      user: 'postgres',
+      password: process.env.LOCAL_PASSWORD,
     },
     pool: {
       min: 2,
@@ -49,19 +50,22 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host: process.env.HEROKU_HOST,
+      port: '5432',
+      database: process.env.HEROKU_DATABASE,
+      user: process.env.HEROKU_USER,
+      password: process.env.HEROKU_PASSWORD,
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
+      directory: './src/database/migrations',
       tableName: 'knex_migrations'
-    }
+    },
   }
 
 };
